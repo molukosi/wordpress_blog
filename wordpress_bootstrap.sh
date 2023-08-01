@@ -27,10 +27,6 @@ wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 mkdir phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1
 rm phpMyAdmin-latest-all-languages.tar.gz
 
-cd /var/www/html
-git clone https://github.com/molukosi/wordpress_blog.git
-cp -r /var/www/html/wordpress_blog/* /var/www/html
-
 sudo vim /etc/httpd/conf/httpd.conf
 
 #FIX FILE PERMISSIONS FOR APACHE WEB SERVER
