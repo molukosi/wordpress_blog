@@ -20,7 +20,7 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wordpressinstance' );
+define( 'DB_NAME', 'wordpressdatabase' );
 
 /** Database username */
 define( 'DB_USER', 'wordpressuser' );
@@ -29,7 +29,7 @@ define( 'DB_USER', 'wordpressuser' );
 define( 'DB_PASSWORD', 'stackinc' );
 
 /** Database hostname */
-define( 'DB_HOST', 'wordpressinstance.cmm4z4nkjmwg.us-east-1.rds.amazonaws.com' );
+define( 'DB_HOST', 'wordpressdatabase.cmm4z4nkjmwg.us-east-1.rds.amazonaws.com' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -92,7 +92,7 @@ define( 'WP_DEBUG', false );
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+        define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */
