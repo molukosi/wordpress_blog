@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Update system
+sudo yum update -y
+
+# Install necessary packages
+sudo dnf update -y
+sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel
+sudo dnf install mariadb105-server -y
+sudo yum install -y httpd mariadb-server
+sudo dnf install git -y
+
+# Start and enable httpd service
+sudo service httpd start
+sudo chkconfig httpd on
+
+# Add ec2-user to apache group
+sudo usermod -a -G apache ec2-user
+
+# Set ownership and permissions for /var/www
+sudo chown -R ec2-user:apache /var/www
+sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+find /var/www -type f -exec sudo chmod 0664 {} \;
+
+# Create phpinfo test page
+echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
+
+# List installed packages
+sudo yum list installed httpd mariadb-server php-mysql
+
+# Remove test page
+rm /var/www/html/phpinfo.php
+
+# Restart httpd and php-fpm services
+sudo service httpd restart
+sudo service php-fpm restart
+
+# Install phpMyAdmin
+cd /var/www/html
+wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+mkdir phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1
+rm phpMyAdmin-latest-all-languages.tar.gz
+
+# Fix file permissions for Apache web server
+sudo chown -R apache /var/www
+sudo chgrp -R apache /var/www
+sudo chmod 2775 /var/www
+find /var/www -type d -exec sudo chmod 2775 {} \;
+find /var/www -type f -exec sudo chmod 0664 {} \;
+
+# Restart httpd service
+sudo service httpd restart
+
+
+
+
+
+
+
+
+
